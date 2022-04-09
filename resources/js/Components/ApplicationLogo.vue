@@ -1,3 +1,3 @@
 <template>
-    <h1 class="text-7xl text-center">MULHAQ</h1>
+    <h1 class="text-center">MULHAQ</h1>
 </template>
