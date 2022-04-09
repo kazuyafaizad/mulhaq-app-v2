@@ -1,5 +1,6 @@
  <template>
- <div class="card bg-neutral text-neutral-content">
+ <Link :href="route('profile')">
+ <div class="card bg-base-200 shadow">
   <div class="card-body items-center text-center">
  <div class="grid grid-cols-3 items-center justify-evenly md:justify-center gap-1 md:gap-10 ">
             <!-- Profile Photo -->
@@ -40,7 +41,7 @@
 </div>
   </div>
 </div>
-
+</Link>
 </template>
 
 <style scoped>

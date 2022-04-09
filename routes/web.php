@@ -24,6 +24,7 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::get('/home', function () {
     return Inertia::render('Home');
 })->middleware(['auth', 'verified'])->name('home');
@@ -31,5 +32,9 @@ Route::get('/home', function () {
 Route::get('/profile', function () {
     return Inertia::render('Profile/Show');
 })->middleware(['auth', 'verified'])->name('profile');
+
+Route::get('/campaign', function () {
+    return Inertia::render('Campaign/Show');
+})->middleware(['auth', 'verified'])->name('campaign.show');
 
 require __DIR__ . '/auth.php';
