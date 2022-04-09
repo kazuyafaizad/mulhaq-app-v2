@@ -1,13 +1,15 @@
  <template>
- <section class="w-full mx-auto grid grid-cols-3 items-center justify-evenly md:justify-center gap-1 rounded md:gap-10 text-white">
+ <div class="card bg-neutral text-neutral-content">
+  <div class="card-body items-center text-center">
+ <div class="grid grid-cols-3 items-center justify-evenly md:justify-center gap-1 md:gap-10 ">
             <!-- Profile Photo -->
             <div class="" v-if="user.profile_photo_url">
                 <div class="mt-2 ">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="mx-auto h-full w-full max-h-[12rem] max-w-[12rem] rounded-full border-solid border-2 border-gray-300 object-cover">
+                    <img :src="user.profile_photo_url" :alt="user.name" class="mx-auto h-full w-full max-h-[12rem] max-w-[12rem] rounded-full object-cover">
                 </div>
             </div>
              <!-- Profile Name -->
-            <div class="mb-5 flex flex-col items-center text-black" >
+            <div class="mb-5 flex flex-col items-center" >
                         <h5 class="text-center">hello</h5>
                         <h1 class="text-xl md:text-2xl capitalize text-center">{{ user.name }}</h1>
             </div>
@@ -30,12 +32,15 @@
                     </svg>
                     <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                        <small class="text-white">Tier</small>
-                    <h2 class="text-3xl capitalize text-center font-semibold text-white">{{ user.tier }}</h2>
+                    <h2 class="text-3xl capitalize text-center font-semibold text-white">{{ user.tier || 0 }}</h2>
                     </div>
                     </div>
 
 
-</section>
+</div>
+  </div>
+</div>
+
 </template>
 
 <style scoped>

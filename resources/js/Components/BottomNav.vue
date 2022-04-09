@@ -7,7 +7,7 @@
                 </svg>
       </BreezeNavLink>
       <BreezeNavLink label="Profile"  :href="route('profile')"  :active="route().current('profile')">
-       <div>USERNAME</div>
+       <div>{{ $page.props.auth.user.name }}</div>
       </BreezeNavLink>
 </div>
 
@@ -20,7 +20,9 @@
                 </svg>
       </BreezeNavLink>
       <BreezeNavLink label="Profile"  :href="route('profile')"  :active="route().current('profile')">
-       <div>USERNAME</div>
+            <div class="" >
+                <img class="w-6 h-6 rounded-full object-cover mx-auto inline-block mb-1 " :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name" />
+            </div>
       </BreezeNavLink>
 </div>
 

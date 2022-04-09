@@ -29,7 +29,7 @@ Route::get('/home', function () {
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/profile', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Profile/Show');
 })->middleware(['auth', 'verified'])->name('profile');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
