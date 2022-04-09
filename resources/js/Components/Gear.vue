@@ -25,10 +25,7 @@
 
                 <div class="rounded-md ring-1 ring-black ring-opacity-5" :class="contentClasses">
                     <div>
-                          <Link :href="route('profile.edit')" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">Edit Account</Link>
-                        <Link :href="route('settings')" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">Settings</Link>
-                        <Link :href="route('api-tokens.index')" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition" v-if="$page.props.jetstream.hasApiFeatures">API Token</Link>
-                         <div class="border-t border-gray-100"></div>
+                          <div class="border-t border-gray-100"></div>
                           <form @submit.prevent="logout">
                                              <button type="submit" class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 text-left hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition">
                                              Log out
