@@ -16,7 +16,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return \File::get(public_path() . '/mulhaq/index.html');
+    return Inertia::render('Welcome');
 });
 
 Route::get('/dashboard', function () {

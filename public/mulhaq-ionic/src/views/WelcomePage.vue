@@ -2,7 +2,9 @@
   <ion-page>
     <ion-content :fullscreen="true">
     <div class="bg-sky">
-    <h1 class="big title uppercase">Develop youth to benefit others  <ion-button color="primary" size="large">Login</ion-button>  <ion-button color="secondary" size="large">Register</ion-button> </h1>
+    <h1 class="big title uppercase">Develop youth to benefit others
+      <ion-button color="primary" size="large" href="/tabs/tab1">Login</ion-button>
+      <ion-button color="secondary" size="large" href="/tabs/tab3">Register</ion-button> </h1>
     </div>
     </ion-content>
   </ion-page>
