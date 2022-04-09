@@ -19,9 +19,11 @@
                 <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
                 </svg>
       </BreezeNavLink>
-      <BreezeNavLink label="Profile"  :href="route('profile')"  :active="route().current('profile')">
-            <div class="" >
-                <img class="w-6 h-6 rounded-full object-cover mx-auto inline-block mb-1 " :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name" />
+      <BreezeNavLink label="Profile" :href="route('profile')"  :active="route().current('profile')">
+            <div class="avatar">
+                <div class="w-6 rounded-full">
+                    <img :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name" class=" object-cover">
+                </div>
             </div>
       </BreezeNavLink>
 </div>

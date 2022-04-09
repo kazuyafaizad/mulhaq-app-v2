@@ -3,9 +3,9 @@
   <div class="card-body items-center text-center">
  <div class="grid grid-cols-3 items-center justify-evenly md:justify-center gap-1 md:gap-10 ">
             <!-- Profile Photo -->
-            <div class="" v-if="user.profile_photo_url">
-                <div class="mt-2 ">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="mx-auto h-full w-full max-h-[12rem] max-w-[12rem] rounded-full object-cover">
+            <div class="avatar" v-if="user.profile_photo_url">
+                <div class="w-full max-w-[12rem] rounded-full">
+                    <img :src="user.profile_photo_url" :alt="user.name" class=" object-cover">
                 </div>
             </div>
              <!-- Profile Name -->
