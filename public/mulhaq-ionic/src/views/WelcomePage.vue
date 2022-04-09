@@ -38,7 +38,7 @@ export default  defineComponent({
     text-transform: uppercase;
 }
 ion-content{
-    --background:url('/public/assets/img/bg-sky.jpg') no-repeat center/cover;
+    --background:url('/public/assets/img/splash.jpg') no-repeat center/cover;
 }
 </style>
 

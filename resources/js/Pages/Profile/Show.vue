@@ -1,13 +1,13 @@
 <template>
     <BreezeAuthenticatedLayout>
-            <div class="flex item-center justify-between relative">
+        <BreezeTopNav/>
+            <div class="flex item-center justify-center mb-5 relative">
               <!-- Profile Photo -->
             <div class="avatar" v-if="$page.props.auth.user.profile_photo_url">
                 <div class="w-full max-w-[12rem] rounded-full">
                     <img :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name"  class="object-cover">
                 </div>
             </div>
-             <Gear/>
             </div>
 
         <ul class="menu bg-base-100 p-2 rounded-box">
@@ -37,6 +37,7 @@
 import { defineComponent } from "vue";
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import BreezeInputError from '@/Components/InputError.vue';
+import BreezeTopNav from '@/Components/TopNav.vue';
 import Gear from '@/Components/Gear.vue';
 import { Link } from "@inertiajs/inertia-vue3";
 
@@ -47,7 +48,8 @@ export default defineComponent({
         BreezeAuthenticatedLayout,
         Link,
         Gear,
-        BreezeInputError
+        BreezeInputError,
+        BreezeTopNav
     },
 
 });
