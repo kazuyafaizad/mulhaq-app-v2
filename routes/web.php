@@ -33,8 +33,12 @@ Route::get('/profile', function () {
     return Inertia::render('Profile/Show');
 })->middleware(['auth', 'verified'])->name('profile');
 
-Route::get('/campaign', function () {
-    return Inertia::render('Campaign/Show');
-})->middleware(['auth', 'verified'])->name('campaign.show');
+Route::get('/builder', function () {
+    return Inertia::render('PageBuilder/Index');
+})->middleware(['auth', 'verified'])->name('builder.index');
+
+Route::get('/builder/create', function () {
+    return Inertia::render('PageBuilder/Create');
+})->middleware(['auth', 'verified'])->name('builder.create');
 
 require __DIR__ . '/auth.php';

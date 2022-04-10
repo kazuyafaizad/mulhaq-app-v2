@@ -5,8 +5,7 @@
         DEVELOP YOUTH TO BENEFIT OTHERS
       </h1>
       <div v-if="canLogin" class="px-6 py-4 block">
-        <Link v-if="$page.props.user" :href="route('home')"> Home </Link>
-
+        <Link v-if="$page.props.auth.user" :href="route('home')" class="btn btn-primary btn-lg"> Start </Link>
         <template v-else>
           <div class="btn-group">
             <Link
