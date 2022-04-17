@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
-use App\Traits\HasProfilePhoto;
+use App\Models\Profile;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasProfilePhoto;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var string[]
      */
     protected $fillable = [
         'name',
@@ -27,29 +27,106 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
+        'name',
         'password',
         'remember_token',
     ];
 
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
-
-
-    /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    /**
+     * Function to create a User along with their profile data
+     *
+     * @return User
+     */
+    public static function register($params)
+    {
+        $user = static::create([
+            'name' => $params['name'],
+            'email' => $params['email'],
+            'password' => Hash::make($params['password'])
+        ]);
+
+        if ($user->wasRecentlyCreated) {
+            Profile::create([
+                'user_id' => $user->id,
+                'fullname' => $params['name'],
+            ]);
+        }
+
+        return $user;
+    }
+
+    /**
+     * DB Relational connection from User -> Profile model
+     *
+     * @return object
+     */
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    /**
+     * DB Relational connection from User -> Image model
+     *
+     * @return object
+     */
+    public function image()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    /**
+     * DB Relational connection from User -> Post model
+     *
+     * @return object
+     */
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * DB Relational connection from User -> Comment model
+     *
+     * @return object
+     */
+    public function comment()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    /**
+     * DB Relational connection from User -> Comment model
+     *
+     * @return object
+     */
+    public function like()
+    {
+        return $this->hasMany(Like::class, 'user_id');
+    }
+
+    /**
+     * DB Relational connection from User -> Notification model
+     *
+     * @return object
+     */
+    public function notification()
+    {
+        return $this->morphMany(Notification::class, 'notifiable')
+            ->orderBy('created_at', 'desc');
+    }
 }

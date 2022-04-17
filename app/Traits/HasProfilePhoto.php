@@ -67,7 +67,7 @@ trait HasProfilePhoto
      */
     protected function defaultProfilePhotoUrl()
     {
-        $name = trim(collect(explode(' ', $this->name))->map(function ($segment) {
+        $name = trim(collect(explode(' ', $this->fullname))->map(function ($segment) {
             return mb_substr($segment, 0, 1);
         })->join(' '));
 

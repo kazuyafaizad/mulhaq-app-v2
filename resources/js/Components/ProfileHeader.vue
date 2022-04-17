@@ -33,7 +33,7 @@
                     </svg>
                     <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                        <small class="text-white">Tier</small>
-                    <h2 class="text-3xl capitalize text-center font-semibold text-white">{{ user.tier || 0 }}</h2>
+                    <h2 class="text-3xl capitalize text-center font-semibold text-white">{{  0 }}</h2>
                     </div>
                     </div>
 

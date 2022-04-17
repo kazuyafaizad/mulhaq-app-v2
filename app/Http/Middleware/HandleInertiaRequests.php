@@ -34,9 +34,27 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        $authenticated_user = null;
+        $user_notifications = 0;
+
+        if ($request->user()) {
+            $user = $request->user()->only('id', 'email', 'name');
+            $profile = $request->user()->profile->only('fullname', 'profile_photo_url');
+
+            $authenticated_user = array_merge($user, $profile);
+            $user_notifications = $request->user()->notification->count();
+        }
+
         return array_merge(parent::share($request), [
             'auth' => [
-                'user' => $request->user(),
+                'user' => $authenticated_user,
+            ],
+            'notifications' => $user_notifications,
+            'flash' => [
+                'content' => [
+                    'message' => fn () => $request->session()->get('message'),
+                    'type' => fn () => $request->session()->get('type'),
+                ]
             ],
             'ziggy' => function () {
                 return (new Ziggy)->toArray();
