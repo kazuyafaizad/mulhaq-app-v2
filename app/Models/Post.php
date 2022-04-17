@@ -29,15 +29,12 @@ class Post extends Model
     {
         $user = Auth::user();
 
-        if ($image instanceof Image)
-        {
+        if ($image instanceof Image) {
             $data = array_merge([
                 'user_id' => $user->id,
                 'image_reference' => $image->path
             ], $params);
-        }
-        else
-        {
+        } else {
             $data = array_merge([
                 'user_id' => $user->id
             ], $params);
@@ -55,33 +52,32 @@ class Post extends Model
     public static function getPosts(int $id = 0)
     {
         $current_user = Auth::user();
-        $name_condition = "CONCAT_WS(' ', firstname, lastname) AS name";
+        $name_condition = "fullname AS name";
 
         $query = static::addSelect([
             'likes' => Like::selectRaw('count(*) as total')
                 ->whereColumn('post_id', 'post.id')
         ])
-        ->addSelect([
-            'likedByCurrentUser' => Like::select('user_id')
-                ->whereColumn('post_id', 'post.id')
-                ->where('user_id', '=', $current_user->id)
-        ])
-        ->addSelect([
-            'byProfileName' => Profile::selectRaw($name_condition)
-                ->whereColumn('user_id', 'post.user_id')
-        ])
-        ->with([
-            'comment' => function($comment) use ($name_condition) {
-                $comment->addSelect([
-                    'byProfileName' => Profile::selectRaw($name_condition)
-                        ->whereColumn('user_id', 'comment.user_id')
-                ]);
-            },
-        ]);
+            ->addSelect([
+                'likedByCurrentUser' => Like::select('user_id')
+                    ->whereColumn('post_id', 'post.id')
+                    ->where('user_id', '=', $current_user->id)
+            ])
+            ->addSelect([
+                'byProfileName' => Profile::selectRaw($name_condition)
+                    ->whereColumn('user_id', 'post.user_id')
+            ])
+            ->with([
+                'comment' => function ($comment) use ($name_condition) {
+                    $comment->addSelect([
+                        'byProfileName' => Profile::selectRaw($name_condition)
+                            ->whereColumn('user_id', 'comment.user_id')
+                    ]);
+                },
+            ]);
 
         // Query specific post
-        if (is_numeric($id) && $id > 0)
-        {
+        if (is_numeric($id) && $id > 0) {
             return $query->where('id', $id)->first()->toArray();
         }
 

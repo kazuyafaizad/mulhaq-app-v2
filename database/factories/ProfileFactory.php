@@ -19,7 +19,7 @@ class ProfileFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'fullname' => $this->faker->fullname(),
+            'fullname' => $this->faker->name(),
             'mobile_number' => $this->faker->regexify('09[0-9]{9}')
         ];
     }

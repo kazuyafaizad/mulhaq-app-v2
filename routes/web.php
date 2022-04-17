@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,20 +26,33 @@ Route::get('/', function () {
 });
 
 
-Route::get('/home', function () {
-    return Inertia::render('Home');
-})->middleware(['auth', 'verified'])->name('home');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/home', function () {
+        return Inertia::render('Home');
+    })->name('home');
 
-Route::get('/profile', function () {
-    return Inertia::render('Profile/Show');
-})->middleware(['auth', 'verified'])->name('profile');
+    Route::get('/profile', function () {
+        return Inertia::render('Profile/Show');
+    })->name('profile');
 
-Route::get('/builder', function () {
-    return Inertia::render('PageBuilder/Index');
-})->middleware(['auth', 'verified'])->name('builder.index');
+    Route::get('/campaign', [PostController::class, 'index'])->name('campaign.index');
+    Route::get('post/{post}', [PostController::class, 'show'])
+        ->name('post.view');
 
-Route::get('/builder/create', function () {
-    return Inertia::render('PageBuilder/Create');
-})->middleware(['auth', 'verified'])->name('builder.create');
+    Route::post('store', [PostController::class, 'store'])
+        ->name('post.store');
+
+    Route::post('storeComment/{post}', [PostController::class, 'storeComment'])
+        ->name('post.comment.store');
+
+    Route::post('storeLike/{post}', [PostController::class, 'storeLike'])
+        ->name('post.like.store');
+
+    Route::post('visibility/{post}/{visibility}', [PostController::class, 'updateVisibility'])
+        ->name('post.visibility');
+
+    Route::post('showNotifications/{user}', [PostController::class, 'showNotifications'])
+        ->name('post.notification');
+});
 
 require __DIR__ . '/auth.php';

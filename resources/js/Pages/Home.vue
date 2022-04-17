@@ -28,7 +28,7 @@
             <h2 class="card-title">Page</h2>
             <p>We are using cookies for no reason.</p>
             <div class="card-actions justify-end">
-            <Link class="btn btn-accent" :href="route('builder.index')">Open Page</Link>
+            <Link class="btn btn-accent" :href="route('campaign.index')">Open Page</Link>
             </div>
         </div>
         </div>

@@ -1,5 +1,5 @@
 <template>
- <div class="left-0 top-0 fixed tabs flex items-center w-full justify-between h-16 lg:px-8">
+ <div class="tabs flex items-center w-full justify-between h-16 lg:px-8 z-10  fixed top-0">
      <div>
      <BackButton/>
     </div>
