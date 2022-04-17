@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Http\Requests\UploadImageRequest;
+use App\Models\Profile;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use App\Gamify\Points\UpdateProfile;
+
+class ProfileController extends Controller
+{
+    use HasImageUploadTrait;
+
+    /**
+     * Upload the specified resource in storage.
+     *
+     * @param UploadImageRequest $request
+     * @param Profile $profile
+     */
+    public function uploadPhoto(UploadImageRequest $request, Profile $profile)
+    {
+        $image = $this->upload($request, 'profile');
+
+        if ($image->wasRecentlyCreated) {
+            $profile->update(['profile_photo_path' => $image->path]);
+        }
+
+        return redirect()->route('view.profile', $profile->user_id)
+            ->with('type', 'alert-success')
+            ->with('message', 'Successfully uploded photo!');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Profile  $profile
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Profile $profile)
+    {
+        return Inertia::render('Profile/Membership', [
+            'profileData' => $profile
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Profile  $profile
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateProfileRequest $request, Profile $profile)
+    {
+        $data = $request->validated();
+        $result = $profile->modify($data);
+
+        if ($result === true) {
+            // you can use helper function
+            givePoint(new UpdateProfile($profile));
+            return redirect()->route('view.profile', $profile->user_id)
+                ->with('type', 'alert-success')
+                ->with('message', 'Successfully updated profile!');
+        } else {
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Profile  $profile
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Profile $profile)
+    {
+        //
+    }
+}

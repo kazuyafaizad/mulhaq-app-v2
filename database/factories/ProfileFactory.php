@@ -20,6 +20,7 @@ class ProfileFactory extends Factory
         return [
             'user_id' => User::factory(),
             'fullname' => $this->faker->name(),
+            'ic_number' => $this->faker->regexify('90[0-9]{10}'),
             'mobile_number' => $this->faker->regexify('09[0-9]{9}')
         ];
     }

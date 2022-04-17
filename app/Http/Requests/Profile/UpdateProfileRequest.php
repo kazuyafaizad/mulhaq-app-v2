@@ -29,18 +29,23 @@ class UpdateProfileRequest extends FormRequest
         $registrationRequest = new RegisterRequest();
         $rules = $registrationRequest->rules();
 
-        $_rules = [
-            'fullname' => $rules['fullname']
-        ];
-
-        return array_merge([
-            'mobile_number' => 'digits:10|nullable',
+        return [
+            'ic_number' => ['required', 'digits:12', 'unique:profile'],
+            'fullname' => ['required', 'string', 'max:255'],
+            'address1' => ['string', 'max:255'],
+            'address2' => ['string', 'max:255'],
+            'postcode' => ['string', 'max:255'],
+            'city' => ['string', 'max:255'],
+            'state' => ['string', 'max:255'],
+            'mobile_number' => ['required', 'digits:11'],
+            'employment' => ['string', 'max:255'],
+            'company_address' => ['string', 'max:255'],
             'email' => [
                 'string', 'email',
                 Rule::unique('users')->where(function ($query) {
                     return $query->where('id', '!=', Auth::user()->id);
                 })
             ]
-        ], $_rules);
+        ];
     }
 }

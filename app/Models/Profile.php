@@ -34,7 +34,17 @@ class Profile extends Model
         'user_id',
         'fullname',
         'mobile_number',
-        'photo'
+        'profile_photo_path',
+        'ic_number',
+        'address1',
+        'address2',
+        'postcode',
+        'city',
+        'state',
+        'email',
+        'mobile_number',
+        'employment',
+        'company_address'
     ];
 
     protected $appends = [
@@ -54,6 +64,7 @@ class Profile extends Model
         unset($data['email']);
 
         $user = User::where('id', $this->user_id)->first();
+
 
         return ($this->update($data) && $user->update($user_data)) ? true : false;
     }

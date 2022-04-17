@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,15 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/profile', function () {
         return Inertia::render('Profile/Show');
     })->name('profile');
+
+    Route::get('profile/{profile}', [ProfileController::class, 'show'])
+        ->name('view.profile');
+
+    Route::put('update-profile/{profile}', [ProfileController::class, 'update'])
+        ->name('update.profile');
+
+    Route::post('upload/{profile}', [ProfileController::class, 'uploadPhoto'])
+        ->name('upload.image');
 
     Route::get('/campaign', [PostController::class, 'index'])->name('campaign.index');
     Route::get('post/{post}', [PostController::class, 'show'])

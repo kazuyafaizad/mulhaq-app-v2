@@ -8,10 +8,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
+use QCod\Gamify\Gamify;
+use App\Gamify\Points\RegisterUser;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Gamify;
 
     /**
      * The attributes that are mass assignable.
@@ -60,10 +62,17 @@ class User extends Authenticatable
         ]);
 
         if ($user->wasRecentlyCreated) {
-            Profile::create([
+
+
+            $profile = Profile::create([
                 'user_id' => $user->id,
                 'fullname' => $params['name'],
+                'ic_number' => ""
             ]);
+
+
+            // you can use helper function
+            $user->givePoint(new RegisterUser($profile));
         }
 
         return $user;

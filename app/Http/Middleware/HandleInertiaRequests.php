@@ -36,11 +36,14 @@ class HandleInertiaRequests extends Middleware
     {
         $authenticated_user = null;
         $user_notifications = 0;
+        $tier = [0];
 
         if ($request->user()) {
             $user = $request->user()->only('id', 'email', 'name');
             $profile = $request->user()->profile->only('fullname', 'profile_photo_url');
 
+            $tier = $request->user()->badges;
+            $user = array_merge($user, ['tier' => $tier[0]->level]);
             $authenticated_user = array_merge($user, $profile);
             $user_notifications = $request->user()->notification->count();
         }
@@ -48,6 +51,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $authenticated_user,
+                'tier' => $tier
             ],
             'notifications' => $user_notifications,
             'flash' => [

@@ -3475,6 +3475,12 @@ body[dir="rtl"] .checkbox:checked,
 .mb-20 {
   margin-bottom: 5rem;
 }
+.-mr-0\.5 {
+  margin-right: -0.125rem;
+}
+.-mr-0 {
+  margin-right: -0px;
+}
 .block {
   display: block;
 }
@@ -3529,6 +3535,9 @@ body[dir="rtl"] .checkbox:checked,
 .h-\[calc\(100vh-9rem\)\] {
   height: calc(100vh - 9rem);
 }
+.h-4 {
+  height: 1rem;
+}
 .max-h-\[50vh\] {
   max-height: 50vh;
 }
@@ -3567,6 +3576,9 @@ body[dir="rtl"] .checkbox:checked,
 }
 .w-96 {
   width: 24rem;
+}
+.w-4 {
+  width: 1rem;
 }
 .max-w-6xl {
   max-width: 72rem;
@@ -3958,6 +3970,9 @@ body[dir="rtl"] .checkbox:checked,
 .leading-6 {
   line-height: 1.5rem;
 }
+.leading-4 {
+  line-height: 1rem;
+}
 .tracking-wider {
   letter-spacing: 0.05em;
 }
@@ -4142,6 +4157,10 @@ body[dir="rtl"] .checkbox:checked,
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+.hover\:text-gray-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 .focus\:z-10:focus {
   z-index: 10;
