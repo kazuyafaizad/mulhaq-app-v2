@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -45,9 +46,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('upload/{profile}', [ProfileController::class, 'uploadPhoto'])
         ->name('upload.image');
 
-    Route::get('/campaign', [PostController::class, 'index'])->name('campaign.index');
-    Route::get('post/{post}', [PostController::class, 'show'])
-        ->name('post.view');
+    Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
+    Route::get('campaign/{post}', [CampaignController::class, 'show'])
+        ->name('campaign.view');
+
+    // Route::get('/post', [PostController::class, 'index'])->name('post.index');
+    // Route::get('post/{post}', [PostController::class, 'show'])
+    //     ->name('post.view');
+
 
     Route::post('store', [PostController::class, 'store'])
         ->name('post.store');

@@ -11,7 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class PostController extends Controller
+class CampaignController extends Controller
 {
     use HasImageUploadTrait;
 
@@ -28,7 +28,7 @@ class PostController extends Controller
             return $posts;
         }
 
-        return Inertia::render('Post/Index', [
+        return Inertia::render('Campaign/Index', [
             'posts' => $posts
         ]);
     }
@@ -50,7 +50,7 @@ class PostController extends Controller
         if ($result) {
             return back()
                 ->with('type', 'alert-success')
-                ->with('message', "Post is now $visibility.");
+                ->with('message', "Campaign is now $visibility.");
         }
     }
 
@@ -89,7 +89,7 @@ class PostController extends Controller
     {
         $post = $post->getPosts($post->id);
 
-        return Inertia::render('Post/View', [
+        return Inertia::render('Campaign/View', [
             'post' => $post
         ]);
     }
@@ -111,7 +111,7 @@ class PostController extends Controller
 
         return back()
             ->with('type', 'alert-success')
-            ->with('message', 'post is now published.');
+            ->with('message', 'Campaign is now published.');
     }
 
     /**

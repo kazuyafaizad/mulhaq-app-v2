@@ -8,10 +8,11 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Traits\HasProfilePhoto;
 
 class ProfileController extends Controller
 {
-    use HasImageUploadTrait;
+    use HasImageUploadTrait, HasProfilePhoto;
 
     /**
      * Upload the specified resource in storage.
@@ -21,11 +22,19 @@ class ProfileController extends Controller
      */
     public function uploadPhoto(UploadImageRequest $request, Profile $profile)
     {
-        $image = $this->upload($request, 'profile');
 
-        if ($image->wasRecentlyCreated) {
-            $profile->update(['profile_photo_path' => $image->path]);
+
+        // $image = $this->upload($request, 'profile');
+
+        if (isset($request['image'])) {
+            $image = $profile->updateProfilePhoto($request['image']);
+
+
+            // if ($image->wasRecentlyCreated) {
+            //     $profile->update(['profile_photo_path' => $image->path]);
+            // }
         }
+
 
         return redirect()->route('view.profile', $profile->user_id)
             ->with('type', 'alert-success')

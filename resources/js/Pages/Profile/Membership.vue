@@ -2,14 +2,6 @@
     <Head title="Profile" />
 
     <MainLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Profile
-            </h2>
-        </template>
-
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div v-if="!showUpdateForm"  class="p-6 bg-white border-b border-gray-200">
                         Here is your profile, {{ $page.props.profileData.fullname }}!
@@ -18,10 +10,27 @@
                     <div v-else class="p-6 bg-white border-b border-gray-200">
                         Update your profile here!
                     </div>
-                    <div class="grid grid-cols-8 p-6">
-                        <div class="profile-photo-box col-span-2">
-                            <template v-if="$page.props.profileData.photo">
-                                <Image :src="$page.props.profileData.photo" />
+
+
+                        <div class="p-6 bg-white border-b border-gray-200 flex justify-end">
+                            <Button
+                                type="button"
+                                @click="showUpdateForm = !showUpdateForm"
+                                class="btn btn-secondary"
+                                >
+                                Edit Profile
+                            </Button>
+                            <Button
+                                type="button"
+                                @click="$refs.fileInput.$refs.input.click()"
+                                class="btn btn-accent"
+                            >Change Photo</Button>
+                        </div>
+
+                    <div class="grid  grid-cols-1 lg:grid-cols-8 p-6">
+                        <div class="profile-photo-box lg:col-span-2 mb-6">
+                            <template v-if="$page.props.profileData.profile_photo_url">
+                                <img :src="$page.props.profileData.profile_photo_url" />
                             </template>
                             <template v-else>
                                 <img src="https://via.placeholder.com/250" />
@@ -34,23 +43,10 @@
                                     id="image" type="file" class="mt-1 block w-full" name="image" />
                             </form>
                         </div>
-                        <div class="col-span-offset-2">
-                            <Button
-                                type="button"
-                                @click="showUpdateForm = !showUpdateForm"
-                                class="mb-2 inline-flex items-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:shadow-outline-blue transition ease-in-out duration-150"
-                                >
-                                Edit Profile
-                            </Button>
-                            <Button
-                                type="button"
-                                @click="$refs.fileInput.$refs.input.click()"
-                            >Change Photo</Button>
-                        </div>
 
                         <template v-if="!showUpdateForm">
-                            <div class="col-span-offset-3 col-span-5">
-                                <div class="ml-9">
+                            <div class="lg:col-span-offset-3 lg:col-span-5">
+                                <div class="lg:ml-9">
                                     <p>
                                         <span class="font-bold">Full Name:</span>
                                         {{ $page.props.profileData.fullname }}
@@ -99,8 +95,8 @@
                             </div>
                         </template>
                         <template v-else>
-                            <div class="col-span-offset-3 col-span-5">
-                                <div class="ml-9">
+                            <div class="lg:col-span-offset-3  lg:col-span-5">
+                                <div class="lg:ml-9">
                                     <form @submit.prevent="submit">
                                         <div>
                                             <Label for="fullname" value="fullname" />
@@ -166,10 +162,10 @@
                                         </div>
                                         <div class="mt-4 flex flex-row-reverse">
                                             <Button @click="updateProfile" type="button" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                                                class="inline-flex items-center bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-600 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:shadow-outline-blue transition ease-in-out duration-150"
+                                                class="btn btn-primary"
                                             >Save Profile
                                             </Button>
-                                            <Button @click="showUpdateForm = !showUpdateForm" type="button" class="mr-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Cancel</Button>
+                                            <Button @click="showUpdateForm = !showUpdateForm" type="button" class="mr-3 btn-secondary" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Cancel</Button>
                                         </div>
                                     </form>
                                 </div>
@@ -177,13 +173,11 @@
                         </template>
                     </div>
                 </div>
-            </div>
-        </div>
     </MainLayout>
 </template>
 <style scoped>
 .profile-photo-box {
-    max-height: 250px;
+    /* max-height: 250px; */
     height: auto;
     max-width: 250px;
     width: 100%;

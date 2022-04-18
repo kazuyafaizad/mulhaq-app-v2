@@ -87,7 +87,7 @@
                             <InputError class="mt-1" :message="$page.props.errors.content" />
                         </form>
                     </div>
-                    <div class="pb-4 overflow-y-auto overflow-x-hidden h-52">
+                    <div class="pb-4 overflow-y-auto h-52">
                         <div class="flex my-2" v-for="(comment) in post.comment" :key="comment.id">
                             <div class="flex justify-content items-center">
                                 <img src="https://via.placeholder.com/35" class="rounded-full rounded-full mb-auto mt-1" />

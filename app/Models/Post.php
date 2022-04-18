@@ -82,7 +82,7 @@ class Post extends Model
         }
 
         // Paginate through all posts
-        return $query->orderBy('id', 'DESC')->cursorPaginate(10)->toArray();
+        return $query->orderBy('id', 'DESC')->cursorPaginate(5)->toArray();
     }
 
     /**

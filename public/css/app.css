@@ -3187,6 +3187,9 @@ body[dir="rtl"] .checkbox:checked,
   min-height: 4rem;
   font-size: 1.125rem;
 }
+.btn-block {
+  width: 100%;
+}
 .btn-square:where(.btn-xs) {
   height: 1.5rem;
   width: 1.5rem;
@@ -3380,6 +3383,9 @@ body[dir="rtl"] .checkbox:checked,
 .col-span-5 {
   grid-column: span 5 / span 5;
 }
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
 .my-1 {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
@@ -3399,6 +3405,10 @@ body[dir="rtl"] .checkbox:checked,
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -3481,6 +3491,9 @@ body[dir="rtl"] .checkbox:checked,
 .-mr-0 {
   margin-right: -0px;
 }
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
 .block {
   display: block;
 }
@@ -3538,11 +3551,26 @@ body[dir="rtl"] .checkbox:checked,
 .h-4 {
   height: 1rem;
 }
+.h-52 {
+  height: 13rem;
+}
 .max-h-\[50vh\] {
   max-height: 50vh;
 }
 .max-h-\[calc\(100vh-9rem\)\] {
   max-height: calc(100vh - 9rem);
+}
+.max-h-24 {
+  max-height: 6rem;
+}
+.max-h-32 {
+  max-height: 8rem;
+}
+.max-h-72 {
+  max-height: 18rem;
+}
+.max-h-52 {
+  max-height: 13rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -3652,6 +3680,9 @@ body[dir="rtl"] .checkbox:checked,
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
 }
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .flex-row {
   flex-direction: row;
 }
@@ -3714,6 +3745,15 @@ body[dir="rtl"] .checkbox:checked,
 .overflow-scroll {
   overflow: scroll;
 }
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
 .break-all {
   word-break: break-all;
 }
@@ -3748,6 +3788,9 @@ body[dir="rtl"] .checkbox:checked,
 }
 .border-b {
   border-bottom-width: 1px;
+}
+.border-l {
+  border-left-width: 1px;
 }
 .border-gray-300 {
   --tw-border-opacity: 1;
@@ -4381,8 +4424,40 @@ body[dir="rtl"] .checkbox:checked,
 }
 @media (min-width: 1024px) {
 
+  .lg\:card-side {
+    align-items: stretch;
+    flex-direction: row;
+  }
+
+  .lg\:card-side figure > * {
+    max-width: unset;
+  }
+
+  :where(.lg\:card-side figure > *) {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .lg\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+
   .lg\:mt-5 {
     margin-top: 1.25rem;
+  }
+
+  .lg\:ml-9 {
+    margin-left: 2.25rem;
+  }
+
+  .lg\:grid-cols-8 {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
   .lg\:px-8 {

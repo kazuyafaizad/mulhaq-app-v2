@@ -10,7 +10,7 @@
                 </div>
       </BreezeNavLink>
 
-      <BreezeNavLink label="Campaign" :href="route('campaign.index')" :active="route().current('campaign.index')" >
+      <BreezeNavLink label="Campaign" :href="route('campaign.index')" :active="route().current('campaign.*')" >
       <div class="flex flex-col justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task w-7 h-7" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
