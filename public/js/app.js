@@ -23075,7 +23075,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     goToViewPage: function goToViewPage(data) {
       window.open(this.route('campaign.view', {
-        post: data.id
+        post: data.slug
       }), '_self');
     }
   }

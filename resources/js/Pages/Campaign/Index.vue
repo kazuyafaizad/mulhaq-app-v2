@@ -279,7 +279,7 @@ export default {
             })
         },
         goToViewPage(data) {
-            window.open(this.route('campaign.view', { post: data.id }), '_self');
+            window.open(this.route('campaign.view', { post: data.slug }), '_self');
         }
     }
 }
