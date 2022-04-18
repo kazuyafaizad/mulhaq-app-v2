@@ -4,8 +4,87 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4d11a7259eb4969510b916fd9f526658",
+    "content-hash": "f8827d5da22d6b57512c76b94f615670",
     "packages": [
+        {
+            "name": "ansezz/laravel-gamify",
+            "version": "dev-hotfix",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kazuyafaizad/laravel-gamify.git",
+                "reference": "18f7aa6aa194b5ab0db784d8e6356628845c9680"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kazuyafaizad/laravel-gamify/zipball/18f7aa6aa194b5ab0db784d8e6356628845c9680",
+                "reference": "18f7aa6aa194b5ab0db784d8e6356628845c9680",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.4.0|~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4 || ~1.0",
+                "orchestra/testbench": "~3.8|^4.0|^5.0|^7.0",
+                "phpunit/phpunit": "~8.5|^9.0"
+            },
+            "type": "vcs",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ansezz\\Gamify\\GamifyServiceProvider"
+                    ],
+                    "aliases": {
+                        "Gamify": "Ansezz\\Gamify\\Facades\\GamifyFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ansezz\\Gamify\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Ansezz\\Gamify\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anass Ez-zouaine",
+                    "email": "ansezzouaine@gmail.com"
+                }
+            ],
+            "description": "Add Gamification in laravel app with point and badges support",
+            "homepage": "https://github.com/ansezz/laravel-gamify",
+            "keywords": [
+                "achivement",
+                "ansezz",
+                "badge",
+                "gamification",
+                "gamify",
+                "laravel",
+                "points",
+                "reputation",
+                "reward"
+            ],
+            "support": {
+                "source": "https://github.com/kazuyafaizad/laravel-gamify/tree/hotfix"
+            },
+            "time": "2022-04-17T23:16:39+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",
@@ -9453,7 +9532,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "ansezz/laravel-gamify": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

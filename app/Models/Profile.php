@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\HasProfilePhoto;
+use Ansezz\Gamify\Point;
 
 class Profile extends Model
 {
@@ -64,6 +65,11 @@ class Profile extends Model
         unset($data['email']);
 
         $user = User::where('id', $this->user_id)->first();
+
+        $point = Point::find(1);
+
+        // or via HasBadge trait method
+        $user->achievePoint($point);
 
 
         return ($this->update($data) && $user->update($user_data)) ? true : false;

@@ -8,8 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
-use QCod\Gamify\Gamify;
-use App\Gamify\Points\RegisterUser;
+use Ansezz\Gamify\Traits\Gamify;
 
 class User extends Authenticatable
 {
@@ -69,10 +68,6 @@ class User extends Authenticatable
                 'fullname' => $params['name'],
                 'ic_number' => ""
             ]);
-
-
-            // you can use helper function
-            $user->givePoint(new RegisterUser($profile));
         }
 
         return $user;

@@ -30,7 +30,7 @@ class UpdateProfileRequest extends FormRequest
         $rules = $registrationRequest->rules();
 
         return [
-            'ic_number' => ['required', 'digits:12', 'unique:profile'],
+            'ic_number' => ['required', 'digits:12'],
             'fullname' => ['required', 'string', 'max:255'],
             'address1' => ['string', 'max:255'],
             'address2' => ['string', 'max:255'],

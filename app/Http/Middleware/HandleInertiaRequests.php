@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
+use Ansezz\Gamify\Badge;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -42,8 +43,10 @@ class HandleInertiaRequests extends Middleware
             $user = $request->user()->only('id', 'email', 'name');
             $profile = $request->user()->profile->only('fullname', 'profile_photo_url');
 
-            $tier = $request->user()->badges;
-            $user = array_merge($user, ['tier' => $tier[0]->level]);
+            $request->user()->syncBadges();
+            $badge = Badge::find(1);
+            $tier = $request->user()->badges->last(); //$badge->isAchieved($request->user());
+            $user = array_merge($user, ['tier' => $request->user()->badges->last() ? $request->user()->badges->last()->level : 0]);
             $authenticated_user = array_merge($user, $profile);
             $user_notifications = $request->user()->notification->count();
         }

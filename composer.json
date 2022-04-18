@@ -4,8 +4,15 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/kazuyafaizad/laravel-gamify.git"
+        }
+    ],
     "require": {
         "php": "^8.0.2",
+        "ansezz/laravel-gamify": "dev-hotfix",
         "beyondcode/laravel-websockets": "^1.12",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",

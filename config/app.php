@@ -163,7 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Ansezz\Gamify\GamifyServiceProvider::class,
         /*
          * Package Service Providers...
          */

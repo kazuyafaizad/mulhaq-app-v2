@@ -8,7 +8,6 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use App\Gamify\Points\UpdateProfile;
 
 class ProfileController extends Controller
 {
@@ -59,8 +58,6 @@ class ProfileController extends Controller
         $result = $profile->modify($data);
 
         if ($result === true) {
-            // you can use helper function
-            givePoint(new UpdateProfile($profile));
             return redirect()->route('view.profile', $profile->user_id)
                 ->with('type', 'alert-success')
                 ->with('message', 'Successfully updated profile!');
