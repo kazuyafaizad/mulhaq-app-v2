@@ -1,5 +1,19 @@
 <template>
-    <Head title="Profile" />
+    <Head title="Profile" >
+    <!-- Facebook, Whatsapp -->
+        <meta property="og:site_name" content="">
+        <meta property="og:title" content="">
+        <meta property="og:description" content="">
+        <meta property="og:image" content="logo.png">
+        <meta property="og:url" content="">
+
+        <!-- Twitter -->
+        <meta name="twitter:title" content="">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="logo.png">
+        <meta property="twitter:url" content="">
+        <meta name="twitter:card" content="summary">
+    </Head>
 
     <MainLayout class="bg-accent">
             <div class="card">
@@ -12,7 +26,7 @@
                             <p class="mb-0">{{ $page.props.post.created_at }}</p>
                         </div>
                     </div>
-                    <Dropdown align="right" width="48">
+                    <Dropdown align="right" width="48" v-if="$page.props.auth.user !== null && $page.props.auth.user.id ===  $page.props.post.user_id">
                         <template #trigger>
                             <button type="button" class="mt-2">
                                 <EllipsisIcon />
@@ -34,7 +48,42 @@
                             </DropdownLink>
                         </template>
                     </Dropdown>
+
+                    <Dropdown align="right" width="48">
+                        <template #trigger>
+                            <button type="button" class="mt-2">
+                                <i class="bi bi-share"></i>
+                            </button>
+                        </template>
+
+                        <template #content>
+                            <DropdownLink>
+                            <ShareNetwork
+                                network="facebook"
+                                :url="route('campaign.view', { post: $page.props.post.id })"
+                                :title="$page.props.post.content"
+                                :description="$page.props.post.content"
+                                :quote="$page.props.post.content"
+                                hashtags="mulhaq,campaign,sukarelawan">
+                                Share on Facebook
+                            </ShareNetwork>
+                            </DropdownLink>
+                            <DropdownLink>
+                            <ShareNetwork
+                                network="WhatsApp"
+                                :url="route('campaign.view', { post: $page.props.post.id })"
+                                :title="$page.props.post.content"
+                                :description="$page.props.post.content"
+                                :quote="$page.props.post.content"
+                                hashtags="mulhaq,campaign,sukarelawan">
+                                Share on WhatsApp
+                            </ShareNetwork>
+                            </DropdownLink>
+
+                        </template>
+                    </Dropdown>
                 </div>
+
                 <div class="divide-y divide-gray-200">
                     <template v-if="$page.props.post.image_reference">
                         <Image :src="$page.props.post.image_reference" />
@@ -50,13 +99,14 @@
                 <div class="bg-clip-padding border-t border-b border-gray-200">
                     <div class="grid grid-cols-2 my-3 ">
                             <button
-                                v-if="$page.props.post.likedByCurrentUser !== null && $page.props.post.likedByCurrentUser === $page.props.auth.user.id"
+                                v-if="$page.props.post.likedByCurrentUser !== null && $page.props.auth.user !== null && $page.props.post.likedByCurrentUser === $page.props.auth.user.id"
                                 type="button"
                                 class="text-blue-600"
                                 @click="onLikePost($page.props.post.id)">Unlike</button>
 
                             <button v-else type="button" @click="onLikePost($page.props.post.id)">Like</button>
-                            <button type="button" @click="onDisplayCommentBox($page.props.post.id)" class="border-l border-gray-200">Comment</button>
+                            <button type="button" @click="onDisplayCommentBox($page.props.post.id)" class="border-l border-gray-200" v-if="$page.props.auth.user !== null">Comment</button>
+                            <button type="button" v-else>Comment</button>
                     </div>
                 </div>
                 <div v-if="displayCommentBox === $page.props.post.id" class="mt-2 mb-4">

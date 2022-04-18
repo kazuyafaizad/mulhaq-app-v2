@@ -47,8 +47,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         ->name('upload.image');
 
     Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
-    Route::get('campaign/{post}', [CampaignController::class, 'show'])
-        ->name('campaign.view');
+
 
     // Route::get('/post', [PostController::class, 'index'])->name('post.index');
     // Route::get('post/{post}', [PostController::class, 'show'])
@@ -70,5 +69,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('showNotifications/{user}', [PostController::class, 'showNotifications'])
         ->name('post.notification');
 });
+
+Route::get('campaign/{post}', [CampaignController::class, 'show'])
+    ->name('campaign.view');
 
 require __DIR__ . '/auth.php';

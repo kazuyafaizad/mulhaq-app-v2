@@ -57,16 +57,24 @@ class Post extends Model
         $query = static::addSelect([
             'likes' => Like::selectRaw('count(*) as total')
                 ->whereColumn('post_id', 'post.id')
-        ])
-            ->addSelect([
+        ]);
+        if (!Auth::Guest()) {
+            $query->addSelect([
                 'likedByCurrentUser' => Like::select('user_id')
                     ->whereColumn('post_id', 'post.id')
                     ->where('user_id', '=', $current_user->id)
-            ])
-            ->addSelect([
-                'byProfileName' => Profile::selectRaw($name_condition)
-                    ->whereColumn('user_id', 'post.user_id')
-            ])
+            ]);
+        } else {
+            $query->addSelect([
+                'likedByCurrentUser' => Like::select('user_id')
+                    ->whereColumn('post_id', 'post.id')
+            ]);
+        }
+
+        $query->addSelect([
+            'byProfileName' => Profile::selectRaw($name_condition)
+                ->whereColumn('user_id', 'post.user_id')
+        ])
             ->with([
                 'comment' => function ($comment) use ($name_condition) {
                     $comment->addSelect([
