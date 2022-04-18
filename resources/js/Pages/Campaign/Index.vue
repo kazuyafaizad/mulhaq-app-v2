@@ -4,7 +4,7 @@
     <MainLayout>
 
         <div class="relative py-3 sm:max-w-4xl sm:mx-auto" v-if="$page.props.auth.user.tier > 0">
-            <div class="relative p-2 bg-white shadow-lg rounded sm:p-10 bg-clip-padding bg-opacity-60 border border-gray-200">
+            <div class="relative p-2 bg-neutral rounded sm:p-10 bg-clip-padding bg-opacity-60 border border-gray-200">
                 <form @submit.prevent>
                     <textarea class="form-textarea mt-1 block w-full rounded"
                         ref="postArea"
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="card lg:card-side bg-base-100 shadow-xl relative my-5" v-for="(post) in userPosts.data" :key="post.id">
+        <div class="card lg:card-side bg-accent relative my-5" v-for="(post) in userPosts.data" :key="post.id">
         <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
         <div class="card-body">
             <div class="card-actions justify-end">

@@ -1,6 +1,6 @@
  <template>
  <Link :href="route('profile')">
- <div class="card bg-base-200 shadow">
+ <div class="card bg-base-200">
   <div class="card-body items-center text-center">
  <div class="grid grid-cols-3 items-center justify-evenly md:justify-center gap-1 md:gap-10 ">
             <!-- Profile Photo -->

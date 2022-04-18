@@ -1,6 +1,6 @@
 <template>
     <BreezeAuthenticatedLayout>
-        <div class="px-3 grid grid-cols-1 gap-5">
+        <div class="grid grid-cols-1 gap-5">
         <ProfileHeader :user="$page.props.auth.user" />
 
         <div class="card bg-neutral text-neutral-content">

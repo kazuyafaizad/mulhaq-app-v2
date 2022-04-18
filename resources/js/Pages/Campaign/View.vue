@@ -1,15 +1,9 @@
 <template>
     <Head title="Profile" />
 
-    <MainLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                My post
-            </h2>
-        </template>
-
-        <div class="relative py-3 sm:max-w-4xl sm:mx-auto">
-            <div class="relative px-16 pb-4 pt-4 bg-white shadow-lg rounded bg-clip-padding bg-opacity-60 border border-gray-200">
+    <MainLayout class="bg-accent">
+            <div class="card">
+                    <div class="card-body">
                 <div class="pb-3 flex justify-between">
                     <div class="flex justify-content items-center">
                         <img src="https://via.placeholder.com/40" class="rounded-full" />
@@ -54,8 +48,7 @@
                     <span v-if="$page.props.post.comment.length > 0" class="text-sm"><span>{{ $page.props.post.comment.length }}</span> Comments</span>
                 </div>
                 <div class="bg-clip-padding border-t border-b border-gray-200">
-                    <div class="flex justify-between my-3">
-                        <div class="px-20">
+                    <div class="grid grid-cols-2 my-3 ">
                             <button
                                 v-if="$page.props.post.likedByCurrentUser !== null && $page.props.post.likedByCurrentUser === $page.props.auth.user.id"
                                 type="button"
@@ -63,10 +56,7 @@
                                 @click="onLikePost($page.props.post.id)">Unlike</button>
 
                             <button v-else type="button" @click="onLikePost($page.props.post.id)">Like</button>
-                        </div>
-                        <div class="px-20">
-                            <button type="button" @click="onDisplayCommentBox($page.props.post.id)">Comment</button>
-                        </div>
+                            <button type="button" @click="onDisplayCommentBox($page.props.post.id)" class="border-l border-gray-200">Comment</button>
                     </div>
                 </div>
                 <div v-if="displayCommentBox === $page.props.post.id" class="mt-2 mb-4">
@@ -96,8 +86,8 @@
                         </div>
                     </div>
                 </div>
+                    </div>
             </div>
-        </div>
     </MainLayout>
 </template>
 <script>
