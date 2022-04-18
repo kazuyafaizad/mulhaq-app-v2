@@ -6,11 +6,23 @@
         <div class="relative py-3 sm:max-w-4xl sm:mx-auto" v-if="$page.props.auth.user.tier > 0">
             <div class="relative p-2 bg-neutral rounded sm:p-10 bg-clip-padding bg-opacity-60 border border-gray-200">
                 <form @submit.prevent>
-                    <textarea class="form-textarea mt-1 block w-full rounded"
+                    <div class="form-control">
+                    <Input
+                    v-model="this.createPostForm.title"
+                    type="text"
+                    class="mt-1 mb-3"
+                    name="title"
+                    placeholder="Title"
+                    />
+                    <InputError class="mt-1" :message="$page.props.errors.title" />
+                    </div>
+                    <div class="form-control">
+                    <textarea class="textarea"
                         ref="postArea"
                         rows="3"
                         v-model="this.createPostForm.content"
                         placeholder="Lorem, ipsum dolor sit amet consectetur adipisicing elit."></textarea>
+                    </div>
                     <InputError class="mt-1" :message="$page.props.errors.content" />
                     <InputError class="mt-1" :message="$page.props.errors.image" />
 
@@ -38,7 +50,40 @@
         <figure><img src="https://api.lorem.space/image/album?w=400&h=400" alt="Album"></figure>
         <div class="card-body">
             <div class="card-actions justify-end">
-            <Dropdown v-if="post.user_id === $page.props.auth.user.id" align="right" width="48">
+                 <Dropdown align="right" width="48">
+                            <template #trigger>
+                                <button type="button" class="mt-2">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                            </template>
+
+                            <template #content>
+                                <DropdownLink>
+                                <ShareNetwork
+                                    network="facebook"
+                                    :url="route('campaign.view', { post: post.slug })"
+                                    :title="post.content"
+                                    :description="post.content"
+                                    :quote="post.content"
+                                    hashtags="mulhaq,campaign,sukarelawan">
+                                    Share on Facebook
+                                </ShareNetwork>
+                                </DropdownLink>
+                                <DropdownLink>
+                                <ShareNetwork
+                                    network="WhatsApp"
+                                    :url="route('campaign.view', { post: post.slug })"
+                                    :title="post.content"
+                                    :description="post.content"
+                                    :quote="post.content"
+                                    hashtags="mulhaq,campaign,sukarelawan">
+                                    Share on WhatsApp
+                                </ShareNetwork>
+                                </DropdownLink>
+
+                </template>
+                        </Dropdown>
+                        <Dropdown v-if="post.user_id === $page.props.auth.user.id" align="right" width="48">
                             <template #trigger>
                                 <button type="button" class="mt-2">
                                     <EllipsisIcon />
@@ -54,8 +99,10 @@
                                 </DropdownLink>
                             </template>
                         </Dropdown>
+
+
             </div>
-            <!-- <h2 class="card-title">New album is released!</h2> -->
+            <h2 class="card-title">{{ post.title }}</h2>
             <p>{{ post.content }}</p>
             <div>
                     <div class="flex flex-row justify-between py-4">
@@ -151,6 +198,7 @@ export default {
             userPosts: this.posts,
             displayCommentBox: false,
             createPostForm: this.$inertia.form({
+                title:'',
                 content: '',
                 image: null
             }),
@@ -207,6 +255,7 @@ export default {
         createPost() {
             this.createPostForm.post(this.route('post.store'), {
                 onFinish: () => {
+                    this.createPostForm.title = ''
                     this.createPostForm.content = ''
                     this.createPostForm.image = null
                 }

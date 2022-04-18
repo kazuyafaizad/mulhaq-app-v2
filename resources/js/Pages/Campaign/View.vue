@@ -26,6 +26,39 @@
                             <p class="mb-0">{{ $page.props.post.created_at }}</p>
                         </div>
                     </div>
+                     <Dropdown align="right" width="48">
+                        <template #trigger>
+                            <button type="button" class="mt-2">
+                                <i class="bi bi-share"></i>
+                            </button>
+                        </template>
+
+                        <template #content>
+                            <DropdownLink>
+                            <ShareNetwork
+                                network="facebook"
+                                :url="route('campaign.view', { post: $page.props.post.slug })"
+                                :title="$page.props.post.content"
+                                :description="$page.props.post.content"
+                                :quote="$page.props.post.content"
+                                hashtags="mulhaq,campaign,sukarelawan">
+                                Share on Facebook
+                            </ShareNetwork>
+                            </DropdownLink>
+                            <DropdownLink>
+                            <ShareNetwork
+                                network="WhatsApp"
+                                :url="route('campaign.view', { post: $page.props.post.slug })"
+                                :title="$page.props.post.content"
+                                :description="$page.props.post.content"
+                                :quote="$page.props.post.content"
+                                hashtags="mulhaq,campaign,sukarelawan">
+                                Share on WhatsApp
+                            </ShareNetwork>
+                            </DropdownLink>
+
+                        </template>
+                    </Dropdown>
                     <Dropdown align="right" width="48" v-if="$page.props.auth.user !== null && $page.props.auth.user.id ===  $page.props.post.user_id">
                         <template #trigger>
                             <button type="button" class="mt-2">
@@ -49,41 +82,9 @@
                         </template>
                     </Dropdown>
 
-                    <Dropdown align="right" width="48">
-                        <template #trigger>
-                            <button type="button" class="mt-2">
-                                <i class="bi bi-share"></i>
-                            </button>
-                        </template>
 
-                        <template #content>
-                            <DropdownLink>
-                            <ShareNetwork
-                                network="facebook"
-                                :url="route('campaign.view', { post: $page.props.post.id })"
-                                :title="$page.props.post.content"
-                                :description="$page.props.post.content"
-                                :quote="$page.props.post.content"
-                                hashtags="mulhaq,campaign,sukarelawan">
-                                Share on Facebook
-                            </ShareNetwork>
-                            </DropdownLink>
-                            <DropdownLink>
-                            <ShareNetwork
-                                network="WhatsApp"
-                                :url="route('campaign.view', { post: $page.props.post.id })"
-                                :title="$page.props.post.content"
-                                :description="$page.props.post.content"
-                                :quote="$page.props.post.content"
-                                hashtags="mulhaq,campaign,sukarelawan">
-                                Share on WhatsApp
-                            </ShareNetwork>
-                            </DropdownLink>
-
-                        </template>
-                    </Dropdown>
                 </div>
-
+                <h2 class="card-title">{{ $page.props.post.title }}</h2>
                 <div class="divide-y divide-gray-200">
                     <template v-if="$page.props.post.image_reference">
                         <Image :src="$page.props.post.image_reference" />

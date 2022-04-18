@@ -6,19 +6,41 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Image;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    use HasFactory, HasReadableTimestampTrait;
+    use HasFactory, HasReadableTimestampTrait, Sluggable;
 
     protected $table = 'post';
 
     protected $fillable = [
         'user_id',
+        'title',
         'content',
         'image_reference',
         'visibility',
+        'slug',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['title', 'id']
+            ]
+        ];
+    }
 
     /**
      * Creates a post for a user and includes image reference when available.
