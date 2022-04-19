@@ -37,7 +37,7 @@
                             <DropdownLink>
                             <ShareNetwork
                                 network="facebook"
-                                :url="route('campaign.view', { post: $page.props.post.slug })"
+                                :url="route('view.campaign', { post: $page.props.post.slug })"
                                 :title="$page.props.post.content"
                                 :description="$page.props.post.content"
                                 :quote="$page.props.post.content"
@@ -48,7 +48,7 @@
                             <DropdownLink>
                             <ShareNetwork
                                 network="WhatsApp"
-                                :url="route('campaign.view', { post: $page.props.post.slug })"
+                                :url="route('view.campaign', { post: $page.props.post.slug })"
                                 :title="$page.props.post.content"
                                 :description="$page.props.post.content"
                                 :quote="$page.props.post.content"

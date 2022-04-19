@@ -28,6 +28,22 @@ Route::get('/', function () {
 });
 
 
+Route::get('landing-pages/create', function () {
+    return Inertia::render('LandingPages/Create');
+})->name('create.landing');
+
+Route::get('landing-pages/{slug?}', function () {
+    return Inertia::render('LandingPages/View');
+})->name('view.landing');
+
+Route::get('page/builder/{uuid}/{type?}', function () {
+    return Inertia::render('PageBuilder/Builder');
+})->name('view.builder');
+
+Route::get('page/preview/{uuid}/{type?}', function () {
+    return Inertia::render('PageBuilder/Preview');
+})->name('preview.builder');
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/home', function () {
         return Inertia::render('Home');
@@ -71,6 +87,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 });
 
 Route::get('campaign/{post}', [CampaignController::class, 'show'])
-    ->name('campaign.view');
+    ->name('view.campaign');
+
+
 
 require __DIR__ . '/auth.php';

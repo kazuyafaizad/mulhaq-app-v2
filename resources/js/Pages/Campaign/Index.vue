@@ -61,7 +61,7 @@
                                 <DropdownLink>
                                 <ShareNetwork
                                     network="facebook"
-                                    :url="route('campaign.view', { post: post.slug })"
+                                    :url="route('view.campaign', { post: post.slug })"
                                     :title="post.content"
                                     :description="post.content"
                                     :quote="post.content"
@@ -72,7 +72,7 @@
                                 <DropdownLink>
                                 <ShareNetwork
                                     network="WhatsApp"
-                                    :url="route('campaign.view', { post: post.slug })"
+                                    :url="route('view.campaign', { post: post.slug })"
                                     :title="post.content"
                                     :description="post.content"
                                     :quote="post.content"
@@ -279,7 +279,7 @@ export default {
             })
         },
         goToViewPage(data) {
-            window.open(this.route('campaign.view', { post: data.slug }), '_self');
+            window.open(this.route('view.campaign', { post: data.slug }), '_self');
         }
     }
 }

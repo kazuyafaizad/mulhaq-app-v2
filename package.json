@@ -35,6 +35,10 @@
         "pusher-js": "^7.0.3",
         "stylus": "^0.55.0",
         "stylus-loader": "^3.0.2",
-        "vue-social-sharing": "^4.0.0-alpha4"
+        "uuid": "^8.3.2",
+        "vue-router": "^4.0.14",
+        "vue-social-sharing": "^4.0.0-alpha4",
+        "vuedraggable": "^2.24.3",
+        "vuex": "^4.0.2"
     }
 }
