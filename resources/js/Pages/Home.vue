@@ -16,9 +16,9 @@
 <div class="divider">Quick Menu</div>
 <ul class="menu bg-base-100 w-full p-2 rounded-box">
   <li>
-     <Link class="text-xl" :href="route('page.index')">
+     <Link class="text-xl" :href="route('page.create')">
       <i class="bi bi-calendar-week"></i>
-        Page
+        My Page
      </Link>
   </li>
 </ul>
