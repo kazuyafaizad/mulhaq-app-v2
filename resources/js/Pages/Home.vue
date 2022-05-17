@@ -21,12 +21,6 @@
         Campaign
      </Link>
   </li>
-  <li>
-    <Link class="text-xl" :href="route('landing-pages.index')">
-      <i class="bi bi-file-earmark-plus"></i>
-        Page
-     </Link>
-  </li>
 </ul>
 
          </div>

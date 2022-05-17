@@ -7,10 +7,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PublicLandingPageController;
-use App\Http\Controllers\LandingPageDraftController;
-use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,18 +29,11 @@ Route::get('/', function () {
 });
 
 
-
-
+require __DIR__ . '/auth.php';
 
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
-
-    Route::get('/builder/{uuid}/{type?}', [LandingPageController::class, 'show'])->name('view.builder');
-
-    Route::get('/preview/{uuid}/{type?}', function () {
-        return Inertia::render('PageBuilder/Preview');
-    })->name('preview.builder');
 
     Route::get('/profile', function () {
         return Inertia::render('Profile/Show');
@@ -81,31 +70,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::post('showNotifications/{user}', [PostController::class, 'showNotifications'])
         ->name('post.notification');
-
-
-
-
-    Route::put('landing-pages/{uuid}/draft',    [LandingPageDraftController::class, 'update']);
-
-    Route::get('landing-pages',                 [LandingPageController::class, 'index'])->name('landing-pages.index');
-    Route::get('landing-pages/{uuid}',          [LandingPageController::class, 'show'])->name('landing-pages.show');
-    Route::post('landing-pages',                [LandingPageController::class, 'store'])->name('landing-pages.store');
-    Route::put('landing-pages/{uuid}',          [LandingPageController::class, 'update'])->name('landing-pages.update');
-    Route::delete('landing-pages/{uuid}',       [LandingPageController::class, 'destroy'])->name('landing-pages.destroy');
-
-    Route::prefix('images')->group(function () {
-
-        Route::get('',                          [ImageController::class, 'index'])->name('images.index');
-        Route::post('',                         [ImageController::class, 'store'])->name('images.store');
-        Route::delete('{uuid}',                 [ImageController::class, 'destroy'])->name('images.delete');
-    });
 });
 
 Route::get('campaign/{post}', [CampaignController::class, 'show'])
     ->name('view.campaign');
-
-
-
-Route::get('/u/{user}/{slug?}', [PublicLandingPageController::class, 'show'])->name('user.page');
-
-require __DIR__ . '/auth.php';

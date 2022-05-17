@@ -1,39 +1,43 @@
 <template>
- <div class="tabs flex items-center w-full justify-between h-16 lg:px-8 z-10  fixed top-0">
-     <div>
-     <BackButton/>
-    </div>
-        <div class=" justify-self-end">
-                                <BreezeDropdown v-if="$page.props.auth.user" align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                                {{ $page.props.auth.user.name }}
-                                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
+<div class="navbar bg-base-100 fixed top-0 z-20">
+  <div class="flex-1">
+        <BackButton/>
+  </div>
+  <div class="flex-none">
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle">
+        <div class="indicator">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+        <span class="badge badge-xs badge-primary indicator-item"></span>
+      </div>
+      </label>
 
-                                    <template #content>
-                                        <BreezeDropdownLink :href="route('view.profile', $page.props.auth.user.id)">
+      <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
+        <div class="card-body">
+          <span class="font-bold text-lg">8 Items</span>
+          <span class="text-info">Subtotal: $999</span>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-block">View cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown dropdown-end" v-if="$page.props.auth.user">
+      <label tabindex="0" class="btn btn-ghost avatar">
+         {{ $page.props.auth.user.name }}
+      </label>
+      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+       <BreezeDropdownLink :href="route('view.profile', $page.props.auth.user.id)">
                                             Profile
                                         </BreezeDropdownLink>
-                                        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
+        <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </BreezeDropdownLink>
-                                    </template>
-                                </BreezeDropdown>
-
-                                <template v-else>
-                                    <div class="flex flex-row gap-3">
-                                        <BreezeNavLink :href="route('login')">Log in</BreezeNavLink>
-                                        <BreezeNavLink :href="route('register')">Register</BreezeNavLink>
-                                    </div>
-                                </template>
-                </div>
+      </ul>
+    </div>
+  </div>
 </div>
+
 
 </template>
 
