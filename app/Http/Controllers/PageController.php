@@ -11,7 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class CampaignController extends Controller
+class PageController extends Controller
 {
     use HasImageUploadTrait;
 
@@ -28,7 +28,7 @@ class CampaignController extends Controller
             return $posts;
         }
 
-        return Inertia::render('Campaign/Index', [
+        return Inertia::render('Page/Index', [
             'posts' => $posts
         ]);
     }
@@ -50,7 +50,7 @@ class CampaignController extends Controller
         if ($result) {
             return back()
                 ->with('type', 'alert-success')
-                ->with('message', "Campaign is now $visibility.");
+                ->with('message', "Page is now $visibility.");
         }
     }
 
@@ -71,7 +71,7 @@ class CampaignController extends Controller
         }
 
         if ($result) {
-            return redirect(route('campaign.index'))
+            return redirect(route('page.index'))
                 ->with('type', 'alert-success')
                 ->with('message', 'post is now published.');
         }
@@ -89,9 +89,15 @@ class CampaignController extends Controller
     {
         $post = $post->getPosts($post->id);
 
-        return Inertia::render('Campaign/View', [
+        return Inertia::render('Page/View', [
             'post' => $post
         ]);
+    }
+
+
+    public function create()
+    {
+        return Inertia::render('Page/Create');
     }
 
     /**
@@ -111,7 +117,7 @@ class CampaignController extends Controller
 
         return back()
             ->with('type', 'alert-success')
-            ->with('message', 'Campaign is now published.');
+            ->with('message', 'Page is now published.');
     }
 
     /**

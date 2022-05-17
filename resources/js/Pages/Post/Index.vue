@@ -230,7 +230,7 @@ export default {
             })
         },
         goToViewPage(data) {
-            window.open(this.route('view.campaign', { post: data.id }), '_self');
+            window.open(this.route('view.page', { post: data.id }), '_self');
         }
     }
 }

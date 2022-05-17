@@ -35,6 +35,13 @@
                                         </BreezeDropdownLink>
       </ul>
     </div>
+
+    <div class="dropdown dropdown-end" v-else>
+                                    <div class="flex flex-row gap-3">
+                                        <BreezeNavLink :href="route('login')">Log in</BreezeNavLink>
+                                        <BreezeNavLink :href="route('register')">Register</BreezeNavLink>
+                                    </div>
+    </div>
   </div>
 </div>
 

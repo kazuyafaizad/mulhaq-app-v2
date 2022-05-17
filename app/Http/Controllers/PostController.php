@@ -71,7 +71,7 @@ class PostController extends Controller
         }
 
         if ($result) {
-            return redirect(route('campaign.index'))
+            return redirect(route('page.index'))
                 ->with('type', 'alert-success')
                 ->with('message', 'post is now published.');
         }

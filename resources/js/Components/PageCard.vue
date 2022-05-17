@@ -28,7 +28,7 @@ export default {
 
     methods: {
         goToViewPage(data) {
-            window.open(this.route('view.campaign', { post: data.slug }), '_self');
+            window.open(this.route('view.page', { post: data.slug }), '_self');
         }
     }
 }
@@ -54,22 +54,22 @@ export default {
                                 <DropdownLink>
                                 <ShareNetwork
                                     network="facebook"
-                                    :url="route('view.campaign', { post: post.slug })"
+                                    :url="route('view.page', { post: post.slug })"
                                     :title="post.content"
                                     :description="post.content"
                                     :quote="post.content"
-                                    hashtags="mulhaq,campaign,sukarelawan">
+                                    hashtags="mulhaq,page,sukarelawan">
                                     Share on Facebook
                                 </ShareNetwork>
                                 </DropdownLink>
                                 <DropdownLink>
                                 <ShareNetwork
                                     network="WhatsApp"
-                                    :url="route('view.campaign', { post: post.slug })"
+                                    :url="route('view.page', { post: post.slug })"
                                     :title="post.content"
                                     :description="post.content"
                                     :quote="post.content"
-                                    hashtags="mulhaq,campaign,sukarelawan">
+                                    hashtags="mulhaq,page,sukarelawan">
                                     Share on WhatsApp
                                 </ShareNetwork>
                                 </DropdownLink>

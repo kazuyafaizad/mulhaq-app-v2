@@ -15,7 +15,7 @@
         <meta name="twitter:card" content="summary">
     </Head>
 
-    <MainLayout class="bg-accent">
+    <MainLayout>
             <div class="card">
                     <div class="card-body">
                 <div class="pb-3 flex justify-between">
@@ -37,22 +37,22 @@
                             <DropdownLink>
                             <ShareNetwork
                                 network="facebook"
-                                :url="route('view.campaign', { post: $page.props.post.slug })"
+                                :url="route('view.page', { post: $page.props.post.slug })"
                                 :title="$page.props.post.content"
                                 :description="$page.props.post.content"
                                 :quote="$page.props.post.content"
-                                hashtags="mulhaq,campaign,sukarelawan">
+                                hashtags="mulhaq,page,sukarelawan">
                                 Share on Facebook
                             </ShareNetwork>
                             </DropdownLink>
                             <DropdownLink>
                             <ShareNetwork
                                 network="WhatsApp"
-                                :url="route('view.campaign', { post: $page.props.post.slug })"
+                                :url="route('view.page', { post: $page.props.post.slug })"
                                 :title="$page.props.post.content"
                                 :description="$page.props.post.content"
                                 :quote="$page.props.post.content"
-                                hashtags="mulhaq,campaign,sukarelawan">
+                                hashtags="mulhaq,page,sukarelawan">
                                 Share on WhatsApp
                             </ShareNetwork>
                             </DropdownLink>

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 
@@ -48,7 +48,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('upload/{profile}', [ProfileController::class, 'uploadPhoto'])
         ->name('upload.image');
 
-    Route::get('/campaign', [CampaignController::class, 'index'])->name('campaign.index');
+    // Route::resource('page', PageController::class);
+    Route::get('page/', [PageController::class, 'index'])->name('page.index');
+    Route::get('mypage/', [PageController::class, 'create'])->name('page.create');
 
 
     // Route::get('/post', [PostController::class, 'index'])->name('post.index');
@@ -72,5 +74,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         ->name('post.notification');
 });
 
-Route::get('campaign/{post}', [CampaignController::class, 'show'])
-    ->name('view.campaign');
+Route::get('page/{post}', [PageController::class, 'show'])
+    ->name('view.page');
