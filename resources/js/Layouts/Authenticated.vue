@@ -1,7 +1,7 @@
 <template>
     <div  class="min-h-screen flex flex-col justify-between items-center pt-6 sm:pt-0">
             <TopNav />
-            <main class="mt-16 mb-20 w-full max-w-4xl mx-auto px-3">
+            <main class="mt-16 mb-20 w-full max-w-4xl mx-auto px-1  gap-4">
                 <slot/>
             </main>
             <BottomNav/>

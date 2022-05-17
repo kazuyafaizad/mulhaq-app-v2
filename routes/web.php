@@ -5,7 +5,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicLandingPageController;
+use App\Http\Controllers\LandingPageDraftController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,26 +33,18 @@ Route::get('/', function () {
 });
 
 
-Route::get('landing-pages/create', function () {
-    return Inertia::render('LandingPages/Create');
-})->name('create.landing');
 
-Route::get('landing-pages/{slug?}', function () {
-    return Inertia::render('LandingPages/View');
-})->name('view.landing');
 
-Route::get('page/builder/{uuid}/{type?}', function () {
-    return Inertia::render('PageBuilder/Builder');
-})->name('view.builder');
 
-Route::get('page/preview/{uuid}/{type?}', function () {
-    return Inertia::render('PageBuilder/Preview');
-})->name('preview.builder');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/home', function () {
-        return Inertia::render('Home');
-    })->name('home');
+    Route::get('/home', [DashboardController::class, 'index'])->name('home');
+
+    Route::get('/builder/{uuid}/{type?}', [LandingPageController::class, 'show'])->name('view.builder');
+
+    Route::get('/preview/{uuid}/{type?}', function () {
+        return Inertia::render('PageBuilder/Preview');
+    })->name('preview.builder');
 
     Route::get('/profile', function () {
         return Inertia::render('Profile/Show');
@@ -84,11 +81,31 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::post('showNotifications/{user}', [PostController::class, 'showNotifications'])
         ->name('post.notification');
+
+
+
+
+    Route::put('landing-pages/{uuid}/draft',    [LandingPageDraftController::class, 'update']);
+
+    Route::get('landing-pages',                 [LandingPageController::class, 'index'])->name('landing-pages.index');
+    Route::get('landing-pages/{uuid}',          [LandingPageController::class, 'show'])->name('landing-pages.show');
+    Route::post('landing-pages',                [LandingPageController::class, 'store'])->name('landing-pages.store');
+    Route::put('landing-pages/{uuid}',          [LandingPageController::class, 'update'])->name('landing-pages.update');
+    Route::delete('landing-pages/{uuid}',       [LandingPageController::class, 'destroy'])->name('landing-pages.destroy');
+
+    Route::prefix('images')->group(function () {
+
+        Route::get('',                          [ImageController::class, 'index'])->name('images.index');
+        Route::post('',                         [ImageController::class, 'store'])->name('images.store');
+        Route::delete('{uuid}',                 [ImageController::class, 'destroy'])->name('images.delete');
+    });
 });
 
 Route::get('campaign/{post}', [CampaignController::class, 'show'])
     ->name('view.campaign');
 
 
+
+Route::get('/u/{user}/{slug?}', [PublicLandingPageController::class, 'show'])->name('user.page');
 
 require __DIR__ . '/auth.php';
