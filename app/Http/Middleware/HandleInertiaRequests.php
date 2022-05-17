@@ -46,7 +46,7 @@ class HandleInertiaRequests extends Middleware
             $request->user()->syncBadges();
             $badge = Badge::find(1);
             $tier = $request->user()->badges->last(); //$badge->isAchieved($request->user());
-            $user = array_merge($user, ['tier' => $request->user()->badges->last() ? $request->user()->badges->last()?->level : 0]);
+            $user = array_merge($user, ['tier' => $request->user()->badges->last() !== null ? $request->user()->badges->last()->level : 0]);
             $authenticated_user = array_merge($user, $profile);
             $user_notifications = $request->user()->notification->count();
         }
