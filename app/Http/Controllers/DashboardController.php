@@ -17,7 +17,7 @@ class DashboardController extends Controller
                 'title' => $title,
                 'content' => $content,
                 'link' => $link,
-                'show' => Auth::user()->badges->last()->level > 0 ? false : true
+                'show' => Auth::user()->badges->last()?->level > 0 ? false : true
             ]
         ]);
     }
